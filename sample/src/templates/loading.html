@@ -1,0 +1,31 @@
+<a-entity
+  id="loadingSongInfoContainer"
+  bind__animation__scale="enabled: isLoading"
+  bind__visible="isLoading"
+  animation__scale="property: scale; from: 1 1 1; to: 1.05 1.05 1.05; dir: alternate; loop: true; dur: 1200; easing: easeInOutCubic"
+  position="0 1.5 -2">
+
+  <a-entity id="loadingSongInfo">
+    <a-entity
+      position="0 -0.1 0.05"
+      mixin="font"
+      bind__text="color: colorPrimary"
+      bind__text-truncate="value: challenge.songSubName + ' - ' + challenge.author + ' - ' + challenge.difficulty"
+      text="wrapCount: 40; align: center"
+      text-truncate="length: 35"
+      render-order="menutext"></a-entity>
+
+    <a-entity
+      id="songProcessingIndicator"
+      bind__animation__spin="enabled: isSongProcessing"
+      bind__material="color: colorPrimary"
+      bind__visible="isSongProcessing"
+      animation__spin="property: object3D.rotation.z; from: 0; to: -360; easing: linear; dur: 1000; loop: true"
+      geometry="primitive: plane; height: 0.15; width: 0.15"
+      material="shader: ring; radiusInner: 0.2; radiusOuter: 0.4; transparent: true; progress: 0.2"
+      render-order="menutext"
+      position="0 -0.2 0.004"
+      visible="false">
+    </a-entity>
+  </a-entity>
+</a-entity>

@@ -20,6 +20,8 @@ AFRAME.registerComponent('plume', {
     this.curveFollowRig = document.getElementById('curveFollowRig');
     this.handsEls = this.el.sceneEl.querySelectorAll('.handStar');
     this.handPos = new THREE.Vector3();
+    this.vectBeat=new THREE.Vector3();
+    this.vectCurve=new THREE.Vector3();
     this.verticalPositions = this.el.sceneEl.components['beat-system'].verticalPositions;
 
     this.el.sceneEl.addEventListener('cleargame', this.returnToPool.bind(this));
@@ -48,7 +50,9 @@ AFRAME.registerComponent('plume', {
   },
 
   tock: function () {
-    if (this.el.object3D.position.z > this.curveFollowRig.object3D.position.z + 10) {
+    this.el.object3D.getWorldPosition(this.vectBeat);
+    this.curveFollowRig.object3D.getWorldPosition(this.vectCurve);
+    if (this.vectBeat.z> this.vectCurve.z+2) {
       this.returnToPool();
       return;
     }
@@ -56,14 +60,14 @@ AFRAME.registerComponent('plume', {
     // Check collisions with hands.
     for (let i = 0; i < this.handsEls.length; i++) {
       const hand = this.handsEls[i];
-      hand.object3D.getWorldPosition(this.handPos);
+      hand.object3D.getWorldPosition(this.handPos); 
       if (this.handPos.distanceToSquared(this.el.object3D.position) < 0.2) {
         hand.emit('plumepulse');
       }
     }
   },
 
-  returnToPool: function () {
+  returnToPool: function () {;
     this.el.object3D.position.set(0, 0, -9999);
     this.el.object3D.visible = false;
     if (this.el.isPlaying) {

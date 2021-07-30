@@ -51,6 +51,7 @@ if (favorites) {
  * 3. Entities and components that are `bind`ed automatically update:
  *    `bind__<componentName>="<propertyName>: some.item.in.state"`
  */
+
 AFRAME.registerState({
   nonBindedStateKeys: ['genres'],
 
@@ -364,6 +365,7 @@ AFRAME.registerState({
       state.isLoading = true;
       state.isVictory = false;
       state.leaderboardQualified = false;
+
     },
 
     gamemenuexit: state => {
@@ -373,8 +375,8 @@ AFRAME.registerState({
       state.isPaused = false;
       state.isVictory = false;
       state.menuActive = true;
-      state.menuSelectedChallenge.id = state.challenge.id;
-      state.menuSelectedChallenge.difficulty = state.challenge.difficulty;
+      state.menuSelectedChallenge.id = '';
+      state.menuSelectedChallenge.difficulty = '';
       state.challenge.id = '';
       state.leaderboardQualified = false;
     },
@@ -473,49 +475,7 @@ AFRAME.registerState({
      * Song clicked from menu.
      */
     menuchallengeselect: (state, id) => {
-      // Copy from challenge store populated from search results.
-      let challenge = challengeDataStore[id];
-      if (!challenge) { return; }
-      Object.assign(state.menuSelectedChallenge, challenge);
-      state.menuSelectedChallenge.songName = truncate(challenge.songName, 24);
-
-      // Populate difficulty options.
-      state.menuDifficulties.length = 0;
-      for (let i = 0; i < challenge.difficulties.length; i++) {
-        state.menuDifficulties.unshift(challenge.difficulties[i]);
-      }
-      state.menuDifficulties.sort(difficultyComparator);
-
-      if (state.difficultyFilter &&
-          state.menuDifficulties.indexOf(state.difficultyFilter) !== -1) {
-        // Default to difficulty if filter active.
-        state.menuSelectedChallenge.difficulty = state.difficultyFilter;
-      } else {
-        // Default to easiest difficulty.
-        state.menuSelectedChallenge.difficulty = state.menuDifficulties[0];
-      }
-
-      state.menuSelectedChallenge.image = utils.getS3FileUrl(id, 'image.jpg');
-      updateMenuSongInfo(state, challenge);
-
-      // Reset audio if it was able to prefetched by zip-loader before.
-      state.challenge.audio = '';
-
-      computeMenuSelectedChallengeIndex(state);
-      state.isSearching = false;
-
-      // Favorited.
-      const isFavorited = !!state.favorites.filter(favorite => favorite.id === id).length;
-      state.menuSelectedChallenge.isFavorited = isFavorited;
-
-      // Clear leaderboard.
-      clearLeaderboard(state);
-      state.leaderboardLoading = true;
-
-      state.hasSongLoadError = false;
-      if (badSongs[id]) {
-        state.hasSongLoadError = true;
-      }
+      menuchallengeselectfct(state, id);
     },
 
     menuchallengeunselect: state => {
@@ -527,7 +487,6 @@ AFRAME.registerState({
     menudifficultyselect: (state, difficulty) => {
       state.menuSelectedChallenge.difficulty = difficulty;
       updateMenuSongInfo(state, state.menuSelectedChallenge);
-
       clearLeaderboard(state);
       state.leaderboardLoading = true;
     },
@@ -553,32 +512,10 @@ AFRAME.registerState({
      * Start challenge.
      * Transfer staged challenge to the active challenge.
      */
-    playbuttonclick: state => {
-      if (badSongs[state.menuSelectedChallenge.id]) { return; }
+    
 
-      let source = 'frontpage';
-      if (state.playlist) { source = 'playlist'; }
-      if (state.search.query) { source = 'search'; }
-      if (state.genre) { source = 'genre'; }
-      gtag('event', 'songsource', {event_label: source});
-
-      resetScore(state);
-
-      // Set challenge.
-      Object.assign(state.challenge, state.menuSelectedChallenge);
-      state.challenge.songNameShort = truncate(state.challenge.songName, 20);
-      gtag('event', 'difficulty', {event_label: state.challenge.difficulty});
-
-      // Reset menu.
-      state.menuActive = false;
-      state.menuSelectedChallenge.id = '';
-      state.menuSelectedChallenge.difficulty = '';
-
-      state.isSearching = false;
-      state.isLoading = true;
-      state.loadingText = 'Loading...'
-
-      gtag('event', 'colorscheme', {event_label: state.colorScheme});
+    playbuttonclick: (state,id) => {
+      playbuttonclickfct(state,id);
     },
 
     playlistclear: (state, playlist) => {
@@ -636,6 +573,7 @@ AFRAME.registerState({
         result.songSubName = result.songSubName || 'Unknown Artist';
         result.shortSongName = truncate(result.songName, SONG_NAME_TRUNCATE).toUpperCase();
         result.shortSongSubName = truncate(result.songSubName, SONG_SUB_NAME_RESULT_TRUNCATE);
+  
         challengeDataStore[result.id] = result;
       }
       computeSearchPagination(state);
@@ -728,9 +666,8 @@ AFRAME.registerState({
       }
     },
 
-    startgame: state => {
-      state.introActive = false;
-      state.menuActive = true;
+    startgame: (state) => {
+      startgamefct(state);
     },
 
     victoryfake: state => {
@@ -783,6 +720,92 @@ AFRAME.registerState({
       (state.isPlaying || state.isPaused);
   }
 });
+
+
+function menuchallengeselectfct(state, id) {
+  // Copy from challenge store populated from search results.
+  let challenge = challengeDataStore[id];
+  if (!challenge) { return; }
+  Object.assign(state.menuSelectedChallenge, challenge);
+  state.menuSelectedChallenge.songName = truncate(challenge.songName, 24);
+
+  // Populate difficulty options.
+  state.menuDifficulties.length = 0;
+  for (let i = 0; i < challenge.difficulties.length; i++) {
+    state.menuDifficulties.unshift(challenge.difficulties[i]);
+  }
+  state.menuDifficulties.sort(difficultyComparator);
+
+  if (state.difficultyFilter &&
+      state.menuDifficulties.indexOf(state.difficultyFilter) !== -1) {
+    // Default to difficulty if filter active.
+    state.menuSelectedChallenge.difficulty = state.difficultyFilter;
+  } else {
+    // Default to easiest difficulty.
+    state.menuSelectedChallenge.difficulty = state.menuDifficulties[0];
+  }
+
+  state.menuSelectedChallenge.image = utils.getS3FileUrl(id, 'image.jpg');
+  updateMenuSongInfo(state, challenge);
+
+  // Reset audio if it was able to prefetched by zip-loader before.
+  state.challenge.audio = '';
+
+  computeMenuSelectedChallengeIndex(state);
+  state.isSearching = false;
+
+  // Favorited.
+  const isFavorited = !!state.favorites.filter(favorite => favorite.id === id).length;
+  state.menuSelectedChallenge.isFavorited = isFavorited;
+
+  // Clear leaderboard.
+  clearLeaderboard(state);
+  state.leaderboardLoading = true;
+
+  state.hasSongLoadError = false;
+  if (badSongs[id]) {
+    state.hasSongLoadError = true;
+  }
+}
+
+function  playbuttonclickfct (state,id) {
+  
+
+  if (badSongs[state.menuSelectedChallenge.id]) { return; }
+
+  let source = 'frontpage';
+  if (state.playlist) { source = 'playlist'; }
+  if (state.search.query) { source = 'search'; }
+  if (state.genre) { source = 'genre'; }
+  gtag('event', 'songsource', {event_label: source});
+
+  resetScore(state);
+
+
+  // Set challenge.
+  //let challenge = challengeDataStore[id];
+  //if (!challenge) { return; }
+  
+  Object.assign(state.challenge, state.menuSelectedChallenge);
+  state.challenge.songNameShort = truncate(state.challenge.songName, 2);
+  gtag('event', 'difficulty', {event_label: state.challenge.difficulty});
+
+  // Reset menu.
+  state.menuActive = false;
+  state.menuSelectedChallenge.id = '';
+  state.menuSelectedChallenge.difficulty = '';
+
+  state.isSearching = false;
+  state.isLoading = true;
+  state.loadingText = 'Loading...'
+
+  gtag('event', 'colorscheme', {event_label: state.colorScheme});
+}
+
+function startgamefct(state){
+  state.introActive = false;
+  state.menuActive = true;
+}
 
 function computeSearchPagination (state) {
   let numPages = Math.ceil(state.search.results.length / SEARCH_PER_PAGE);

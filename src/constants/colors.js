@@ -18,13 +18,13 @@ const COLORS = {
 
 COLORS.schemes = {
   default: {
-    name: 'Aptero',
+    name: 'Super Medium',
     off: '#111',
-    primary: '#6A39B3',
-    primarybright: '#B685FF',
-    secondary: '#FAF239',
-    secondarybright: '#FFFC9E',
-    tertiary: '#50FFF2'
+    primary: COLORS.RED,
+    primarybright: COLORS.BRIGHTRED,
+    secondary: COLORS.BLUE,
+    secondarybright: COLORS.BRIGHTBLUE,
+    tertiary: COLORS.YELLOW
   },
 
   blue: {

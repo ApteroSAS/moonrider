@@ -95,7 +95,6 @@ AFRAME.registerComponent('beat-system', {
       this.blades.push(this.bladeEls[i].components.blade);
       this.fists.push(this.punchEls[i].components.punch);
     }
-
     this.supercurve = this.curveEl.components.supercurve;
     this.supercurveFollow = this.curveFollowRig.components['supercurve-follow'];
   },
@@ -120,7 +119,6 @@ AFRAME.registerComponent('beat-system', {
     const beatsToCheck = this.beatsToCheck;
     const curve = this.supercurve.curve;
     const progress = this.supercurveFollow.songProgress;
-
     // Filter for beats that should be checked for collisions.
     beatsToCheck.length = 0;
     for (let i = 0; i < this.beats.length; i++) {
@@ -298,6 +296,9 @@ AFRAME.registerComponent('beat', {
     this.rigContainer = document.getElementById('rigContainer');
     this.superCuts = document.querySelectorAll('.superCutFx');
 
+    this.vectBeat=new THREE.Vector3();
+    this.vectCurve=new THREE.Vector3();
+
     this.verticalPositions = this.beatSystem.verticalPositions;
 
     this.explodeEventDetail = {
@@ -320,12 +321,13 @@ AFRAME.registerComponent('beat', {
     } else {
       this.poolName = `pool__beat-${this.data.type}-${this.data.color}`;
     }
+    
   },
 
   tick: function (time, timeDelta) {
     const el = this.el;
     const data = this.data;
-
+    
     // Delay these events into next frame to spread out the workload.
     if (this.queueBeatHitEvent) {
       el.sceneEl.emit('beathit', this.queueBeatHitEvent, true);
@@ -351,7 +353,9 @@ AFRAME.registerComponent('beat', {
 
     // Check if past the camera to return to pool.
     const returnDistance = this.data.type === 'mine' ? 0.25 : 1.25;
-    if ((el.object3D.position.z - returnDistance) > this.curveFollowRig.object3D.position.z) {
+    this.el.object3D.getWorldPosition(this.vectBeat);
+    this.curveFollowRig.object3D.getWorldPosition(this.vectCurve);
+    if ((this.vectBeat.z - returnDistance) > this.vectCurve.z) {
       this.returnToPool();
       this.missHit();
     }
@@ -409,6 +413,7 @@ AFRAME.registerComponent('beat', {
     el.object3D.position.y -= offset;
     this.positionStart = el.object3D.position.y;
     this.positionChange = this.verticalPositions[verticalPosition] + offset + heightOffset;
+
   },
 
   /**
@@ -442,6 +447,7 @@ AFRAME.registerComponent('beat', {
   missHit: function () {
     if (this.data.type === MINE) { return; }
     this.el.sceneEl.emit('beatmiss', null, true);
+
   },
 
   destroyBeat: function (weaponEl, correctHit) {

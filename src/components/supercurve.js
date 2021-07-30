@@ -29,7 +29,7 @@ AFRAME.registerComponent('supercurve', {
   },
 
   play: function () {
-    this.generateCurve(1500);
+    this.generateCurve(60);
   },
 
   /**
@@ -55,8 +55,8 @@ AFRAME.registerComponent('supercurve', {
       prevPoint = this.points[i - 1];
       currentLength += CURVE_SECTION_LENGTH;
       this.points.push(new THREE.Vector3(
-        prevPoint.x + (Math.random() * X_MAX_DEVIATION * 2 - X_MAX_DEVIATION),
-        prevPoint.y + (Math.random() * Y_MAX_DEVIATION * 2 - Y_MAX_DEVIATION),
+        prevPoint.x,
+        prevPoint.y,
         -1 * currentLength
       ));
     }

@@ -108,6 +108,10 @@ AFRAME.registerComponent('beat-generator', {
       this.processBeats();
     });
 
+    /*this.el.addEventListener('restart', evt =>{
+      this.processBeats();
+    })*/
+
     /*
       // For debugging: generate beats on key space press.
       document.addEventListener('keydown', ev => {
@@ -192,18 +196,18 @@ AFRAME.registerComponent('beat-generator', {
       // Song is not playing and is preloading beats, use maintained beat time.
       songTime = this.preloadTime;
     }
-
     const bpm = this.beatData._beatsPerMinute;
     const msPerBeat = 1000 * 60 / this.beatData._beatsPerMinute;
-
+   
     // Load in stuff scheduled between the last timestamp and current timestamp.
     // Beats.
     const notes = this.beatData._notes;
+
     for (let i = this.index.notes; i < notes.length; ++i) {
-      if (songTime + BEAT_FORWARD_TIME > notes[i]._time * msPerBeat) {
+     if (songTime + BEAT_FORWARD_TIME > notes[i]._time * msPerBeat) {
         this.generateBeat(notes[i]);
         this.index.notes++;
-      }
+      } 
     }
 
     if (this.data.gameMode !== 'ride') {
@@ -370,12 +374,13 @@ AFRAME.registerComponent('beat-generator', {
       case 4:
         this.stageColors.setColor('floor', event._value);
         break;
+      /*
       case 8:
         this.tube.emit('pulse', null, false);
         break;
       case 9:
         this.tube.emit('pulse', null, false);
-        break;
+        break;*/
       case 12:
         this.stageColors.setColor('leftglow', event._value);
         break;

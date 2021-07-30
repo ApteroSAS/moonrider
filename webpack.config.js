@@ -18,6 +18,7 @@ module.exports = {
   optimization: {
     minimize: process.env.NODE_ENV === 'production'
   },
+  //devtool: 'source-map',
   devServer: {
     disableHostCheck: true,
     hotOnly: true
@@ -29,7 +30,9 @@ module.exports = {
   output: {
     globalObject: 'this',
     path: __dirname,
-    filename: 'build/[name].js'
+    filename: 'build/[name].js',
+    library: '$',
+    libraryTarget: 'umd',
   },
   plugins: PLUGINS,
   module: {

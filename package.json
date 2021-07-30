@@ -1,8 +1,10 @@
 {
-  "private": true,
+  "name": "moonriderlib",
   "version": "1.0.0",
+  "main": "build/build.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
+    "build-dev": "cross-env webpack",
     "deploy": "npm run predeploy && ghpages git@github.com:supermedium/moonrider.git -p .ghpages && rm -rf .ghpages",
     "lint": "semistandard -v | snazzy",
     "lint:fix": "semistandard --fix",

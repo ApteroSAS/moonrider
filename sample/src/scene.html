@@ -110,11 +110,14 @@
   
   <a-entity
     id="wallContainer"
-    bind__visible="isPlaying"></a-entity>
+    bind__move="enabled: isPlaying; speed: speed"
+    bind__move-reset="isVictory: isVictory; enabled: isPlaying"
+    move
+    bind__visible="true"></a-entity>
 
   <a-entity id="curveFollowRig"
     bind__curve-follow-rig-reset="isVictory: isVictory"
-    bind__supercurve-follow="enabled: false; speed: speed"
+    bind__supercurve-follow="enabled: isPlaying; speed: speed"
     supercurve-follow="target: #curve">
 
     <!-- Beat pieces, explosions, fx, and weapon trail. -->
@@ -302,6 +305,4 @@
     render-order="weapon"
     bind__visible="isPlaying && gameMode === 'ride'"></a-entity>
 
-
- 
   </a-scene>

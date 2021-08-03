@@ -70,11 +70,7 @@
   <a-assets timeout="3000">
     <require path="assets.html"></require>
   </a-assets>
-  
 
-  <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"  
-  bind__move="enabled: isPlaying; speed: speed"
-  move></a-box>
   <a-sky color="#ECECEC"></a-sky>
   
   <a-entity id="beatObjTemplate" obj-model="obj: #beatObj" visible="false"></a-entity>
@@ -93,6 +89,11 @@
     audioanalyser="fftSize: 32; enableBeatDetection: false; enableLevels: false; enableWaveform: false; enableVolume: false">
   </a-entity>
   
+  <a-mixin
+    id="cursorMesh"
+    material="shader: flat; transparent: true; src: #cursorMeshImg; depthTest: false"
+    sub-object="from: #cursorLaser; name: glow"></a-mixin>
+
   <a-entity
     id="curve"
     material="shader: supercurve"

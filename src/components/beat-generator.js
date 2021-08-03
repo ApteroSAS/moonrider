@@ -108,10 +108,6 @@ AFRAME.registerComponent('beat-generator', {
       this.processBeats();
     });
 
-    /*this.el.addEventListener('restart', evt =>{
-      this.processBeats();
-    })*/
-
     /*
       // For debugging: generate beats on key space press.
       document.addEventListener('keydown', ev => {
@@ -209,7 +205,7 @@ AFRAME.registerComponent('beat-generator', {
         this.index.notes++;
       } 
     }
-
+   
     if (this.data.gameMode !== 'ride') {
       // Walls.
       const obstacles = this.beatData._obstacles;

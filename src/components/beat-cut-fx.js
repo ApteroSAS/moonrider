@@ -93,7 +93,7 @@ AFRAME.registerComponent('beat-cut-fx', {
     if (!position || !rotation || !direction || this.data.color !== evt.detail.color) {
       return;
     }
-
+   
     this.el.object3D.position.copy(position);
 
     if (gameMode === 'classic' && this.data.type !== 'mine') {

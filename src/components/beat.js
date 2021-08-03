@@ -119,6 +119,7 @@ AFRAME.registerComponent('beat-system', {
     const beatsToCheck = this.beatsToCheck;
     const curve = this.supercurve.curve;
     const progress = this.supercurveFollow.songProgress;
+    
     // Filter for beats that should be checked for collisions.
     beatsToCheck.length = 0;
     for (let i = 0; i < this.beats.length; i++) {
@@ -129,6 +130,7 @@ AFRAME.registerComponent('beat-system', {
 
       // Check if beat is close enough to be hit.
       const beatProgress = beat.songPosition - this.weaponOffset;
+      
       if (progress < beatProgress) { continue; }
 
       // Check if beat should be filtered out due to not being in front.
@@ -454,7 +456,6 @@ AFRAME.registerComponent('beat', {
     const data = this.data;
     const explodeEventDetail = this.explodeEventDetail;
     const rig = this.rigContainer.object3D;
-
     this.blockEl.object3D.visible = false;
 
     this.destroyed = true;
@@ -464,7 +465,7 @@ AFRAME.registerComponent('beat', {
     explodeEventDetail.color = this.data.color;
     explodeEventDetail.correctHit = correctHit;
     explodeEventDetail.gameMode = this.beatSystem.data.gameMode;
-    explodeEventDetail.position.copy(this.el.object3D.position);
+    this.el.object3D.getWorldPosition(explodeEventDetail.position);
     rig.worldToLocal(explodeEventDetail.position);
 
     let brokenPoolName;

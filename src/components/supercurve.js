@@ -236,7 +236,7 @@ AFRAME.registerComponent('supercurve', {
     return function (percent, object3D) {
       this.getPositionRelativeToTangent(percent, lookAt, lookAtTarget);
       object3D.lookAt(lookAtTarget);
-      object3D.position.y += 0.01;  // Z-fighting
+      //object3D.position.y += 0.01;  // Z-fighting
     };
   })(),
 
@@ -274,7 +274,7 @@ AFRAME.registerComponent('supercurve-follow', {
   tick: (function () {
     const lookAt = new THREE.Vector3(0, 0, 1);
     const lookAtTarget = new THREE.Vector3();
-
+    
     return function (t, dt) {
       const data = this.data;
       const el = this.el;
@@ -303,9 +303,10 @@ AFRAME.registerComponent('supercurve-follow', {
       }
 
       // Update lookAt down the tangent.
-      curve.getPointAt(this.curveProgress, this.el.object3D.position);
+      curve.getPointAt(0, this.el.object3D.position);
       this.songProgress = supercurve.curveProgressToSongProgress(this.curveProgress);
-      supercurve.alignToCurve(this.songProgress, this.el.object3D);
+      supercurve.alignToCurve(0, this.el.object3D);
+     
     };
   })()
 });

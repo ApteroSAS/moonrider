@@ -49,10 +49,6 @@ To update the difficulty dropdown list, I use a listener on the 'change' event o
 **restart** : This function allows to restart a game. It can be used at different times : when the game has been paused or at the end of a game. It does not require any parameter and emits the gamemenurestart and cleargame events
 
 **exit** : This function allows to leave a game and to return to the main menu. It can be called at different stages of the game: just after the game has been paused or at the end of a game. It does not require any parameters and emits the gamemenuexit and cleargame events. 
-
-
-note: 
-
-Toutes les fonctions ci-dessus ont été mis dans un objet afin de pouvoir les exporter facilement et les utiliser via l’api. J’ai donc crée un objet nommé **obj** dans le fichier **./src/state/test.js** que j’ai exporté. Dans le fichier **./src/index.js** j’ai importé le fichier test et j’ai récupéré l’objet exporté et je l’ai stocké dans une variable nommée **objet\_api**. Les fonctions stockées dans cet objet sont donc accessibles via ce dernier. 
+ 
 
 All the above functions have been put in an object in order to be able to export them easily and use them via the api. So I created an object named **obj** in the file **./src/state/functionsApi.js** that I exported. In the file **./src/index.js** I imported the functionsApi file and I retrieved the exported object and I stored it in a variable named **objet\_api**. The functions stored in this object are accessible via the latter. 

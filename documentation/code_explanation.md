@@ -1,6 +1,6 @@
 ﻿**Explanation of code**
 
-1. # **Operation of the stateful system and api functions**
+# **Operation of the stateful system and api functions**
 
 Moonrider uses the A-Frame framework and more specifically a stateful system. This state management for A-Frame consists in using a single global state modified by actions. The state of the application is a singleton defining an initial state as well as management functions allowing to modify this state. The initialization of the state as well as the management functions are defined in the ./src/state/index.js file. The initialization section is named initialState and the section including the management functions is named handlers. 
 
@@ -9,7 +9,7 @@ I made a file named functionsApi.js in which I created an object (in order to fa
 Let's take the example of the Begin button defined in the ./sample/index.html file:
 
 When this button is clicked, it calls the start function defined in the previously mentioned object. This start function activates itself two management functions: startgame and menuopeningend. The drop-down lists of possible songs and difficulties are also filled in when the button is clicked. 
-1. # **Functioning of the curve**
+# **Functioning of the curve**
 
 The curve entity is defined in the file ./sample/src/scenes.html and is composed of different components. In the component surpercurve (defined in the file ./src/components/supercurve.js), I modified the generateCurve function so that the curve remains straight. To do so, I removed the Math.random that was making the curve deviate (line 58 -59 in the original file):
 
@@ -52,7 +52,7 @@ To change the primary and secondary colors of the curve during the game you have
 `      `this.setColor('color2', evt.detail);
 
 The primary and secondary colors are defined in ./src/constants/colors.js according to the chosen theme. 
-1. # **Functioning of beat generation** 
+# **Functioning of beat generation** 
 
 The beat generation is done in the file ./src/components/beat-generator.js and more particularly in the generateBeat function. In the tick part of this component, the for loop (lines 202 to 207) allows to generate the beats:
 
@@ -80,18 +80,18 @@ In the setupBeat function, the following three lines (lines 281 to 283) are used
 
 Each beat is positioned on the curve according to coordinates. The vertical position varies between the integers 0,1 and 2. These integers correspond respectively to the lowest position, the middle position, and the highest position. The horizontal position varies between the integers:
 
-\- -2: located at the level of the line on the left
+\. -2: located at the level of the line on the left
 
-\- -1: located at the level of the line in the middle on the left
+\. -1: located at the level of the line in the middle on the left
 
-\- 0: located at the level of the line in the middle
+\. 0: located at the level of the line in the middle
 
-\- 1: located at the level of the line in the middle on the right
+\. 1: located at the level of the line in the middle on the right
 
-\- 2: located at the level of the line on the right
+\. 2: located at the level of the line on the right
 
 Depending on the chosen game mode, two types of components are used for the beats. If the mode is ride mode then each beat will use the plume component and for other modes it will use the beat component.
-1. # **Functioning of the player's movement** 
+# **Functioning of the player's movement** 
 
 In the initial game, the player moves on the curve following the follow mechanism. However, in the modified version, we want the player to stay on the spot and the beats and the walls to come to him. So, I had to disable the player's movement while keeping the supercurve-follow component defined in the ./src/components/supercurve.js file. This component had to be kept because it allows to update the songProgress variable necessary to detect the destruction of the beats and the disappearance of the walls. 
 
@@ -116,7 +116,7 @@ This aligns the area under the player in the right direction and therefore turns
 `   `//object3D.position.y += 0.01;  // Z-fighting
 
 
-1. # **Explanation of the move and move-reset components**
+# **Explanation of the move and move-reset components**
 
 In order to make the beats and walls move towards the player, I created a move component. It has two properties defined in the schema: enabled (a boolean set to false by default) and speed. In the tick part, I calculate the real speed of the movement according to the speed property and I translate the object on Z equal to the real speed value. The Z-axis position increases as the beat (respectively the wall) moves towards the player. I put a condition before performing these two actions so that they are only performed if the enabled property is true.  
 
@@ -132,7 +132,7 @@ I also created a move-reset component that allows to reposition the BeatContaine
 
 By adding these lines to the entities I want to move, the enabled property of the move component corresponds to the value isPlaying and thus allows to move the entities only when the game is launched. The speed property corresponds to the value of the speed variable defined in the file ./src/state/index.js in the initialState part and which is 10. So, if we want to accelerate the speed of the game, we have to modify this variable. 
 
-1. # **Position relative to the world** 
+# **Position relative to the world** 
 
 An important concept to understand is that there are two positions for objects in 3D: the position relative to the parent object and the position relative to the world. By moving the beats and walls towards the player, this notion came into play. Indeed, I had to make different modifications to compare the positions relative to the world and not those relative to the parents.  
 

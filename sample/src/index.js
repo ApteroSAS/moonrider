@@ -16,33 +16,33 @@ window.onload=function(){
 
     const selectListSongs=document.getElementById('listSongs');
     selectListSongs.addEventListener('change',function(){
-        api.objet_api.listDifficulties('listSongs','listDifficulties');
+        api.object_api.listDifficulties('listSongs','listDifficulties');
     })
 
     buttonBegin.addEventListener('click',function(){
        
         buttonBegin.style.opacity = 0;
         buttonBegin.disabled=true;
-        api.objet_api.start();    
-        api.objet_api.listSongs("listSongs");
-        api.objet_api.listDifficulties("listSongs","listDifficulties");
+        api.object_api.start();    
+        api.object_api.listSongs("listSongs");
+        api.object_api.listDifficulties("listSongs","listDifficulties");
     });
     
     buttonPlay.addEventListener('click',function(){
-        api.objet_api.playMusic('listSongs','listDifficulties');
+        api.object_api.playMusic('listSongs','listDifficulties');
     });
 
     buttonPause.addEventListener('click',function(){
-        api.objet_api.pause();
+        api.object_api.pause();
     })
 
     buttonRestart.addEventListener('click',function(){
-        api.objet_api.restart();
+        api.object_api.restart();
     })
     buttonResume.addEventListener('click',function(){
-        api.objet_api.resume();
+        api.object_api.resume();
     })
     buttonExit.addEventListener('click',function(){
-        api.objet_api.exit();
+        api.object_api.exit();
     })
 };

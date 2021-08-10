@@ -1,5 +1,5 @@
 const testApi=require("./state/functionsApi");
-export var objet_api=testApi.obj;
+export var object_api=testApi.obj;
 
 function requireAll (req) { req.keys().forEach(req); }
 

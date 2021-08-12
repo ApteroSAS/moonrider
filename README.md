@@ -51,7 +51,7 @@ A-Frame and JavaScript, is doable!
 | ?debugstate={loading, victory}          | Show loading or victory screen.                               |
 | ?skipintro=true                         | Skip introduction screen.                                     |
 
-##How the example works
+## How the example works
 
 - Click on the Begin button
 - Choose the game mode you want:

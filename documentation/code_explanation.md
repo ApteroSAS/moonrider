@@ -192,13 +192,18 @@ In the beat.js file you have to replace the line in comment with the line above 
 - Stop moving curveFollowRig and keep updating the songProgress variable
 - preservation of the effect when a beat is cut
 - Removal of console.log for debugs
+- Scores to manage 
 
 ## **Modifications to do:** 	
 
-- Transform the entities corresponding to the different available modes into HTML buttons 
-- Scores to manage 
-- Check the direction of the camera with the VR headset
-- Check when you quit/end a song from the VR mode if you can start another song 
-- Realize the music server: use the music on YouTube and not the moonrider server
-- In ride mode, remove superfluous beats (those above, on the sides and below the track)
+	
+-	Check that the message Game over or song cleared is displayedChange the A-Frame buttons at the end of the game (victory or defeat) into html buttons
+-	Successfully put a color on the victoryAccuracyRing entity 
+-	Look at how to do in case of defeat to restart and quit
+-	Make html buttons and drop-down lists appear in VR mode
+-	Punch mode to work
+-	Transform the entities corresponding to the different available modes into HTML buttons 
+-	Check the direction of the camera with the VR headset (sometimes the curve is behind or to the side of the player and/or very close to the ground)
+-	Realize the music server: use the music on YouTube and not the moonrider server
+-	In ride mode, remove superfluous beats (those above, on the sides and below the track)
 

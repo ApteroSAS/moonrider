@@ -83,7 +83,8 @@
 
   <require path="templates/modes.html"></require>
   <require path="templates/loading.html"></require>
-
+ <require path="templates/victory.html"></require>
+  
   <a-entity
     id="audioAnalyser"
     audioanalyser="fftSize: 32; enableBeatDetection: false; enableLevels: false; enableWaveform: false; enableVolume: false">
@@ -121,6 +122,8 @@
     bind__supercurve-follow="enabled: isPlaying; speed: speed"
     supercurve-follow="target: #curve">
 
+      <require path="templates/score.html"></require>
+    
     <!-- Beat pieces, explosions, fx, and weapon trail. -->
     <a-entity id="rigContainer"></a-entity>
 
@@ -305,5 +308,5 @@
     tail="target: #rightstar"
     render-order="weapon"
     bind__visible="isPlaying && gameMode === 'ride'"></a-entity>
-
+ 
   </a-scene>

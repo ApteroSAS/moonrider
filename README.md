@@ -1,62 +1,41 @@
 # Moon Rider
 
-![moonrider](https://user-images.githubusercontent.com/674727/54646629-e91dc600-4a5c-11e9-8a6e-91e77f28523d.jpg)
-
-Surf the musical road among the moon, stars, and northern lights.
-
-A side project built by two people in a few months to show off VR running
-inside a webpage. Built with HTML, JavaScript, and A-Frame. Not meant to be an
-official game nor commerical product. Moon Rider is meant to be an open source
-resource for the web developer community to learn from, and to push forward the
-open WebXR initiative.
-
-![gif](https://user-images.githubusercontent.com/674727/58050249-ab442900-7b03-11e9-8763-913d42a26708.gif)
-
-**[Read more about it with elliottate at bsaber.com](https://bsaber.com/moonrider/)**
-
-Song maps are sourced from beatsaver.com with expressed support from the Beat
-Saver community admins. Supports all browsers and headsets (incl. Quest). If
-there are any issues, file an issue here on GitHub or leave a message in the
-[Supermedium Discord](https://supermedium.com/discord).
-
-[**Try the site out now in your browser!**](https://supermedium.com/moonrider/)
-
-![](https://user-images.githubusercontent.com/674727/58050969-b8621780-7b05-11e9-9494-1db7cee9f69b.jpeg)
-
-Featuring various modes:
-
-- **Ride Mode** - Just sit back and enjoy the ride.
-- **Punch Mode** - Crush the stars.
-- **Viewer Mode** - Watch the beatmap within your browser.
-- **Classic Mode** - Surf and slice along the musical road.
-
-Big thanks to @elliottate for helping out with this!
-
 ## Development
 
-Have Node (< v12, recommended v11) and npm installed.
+To modify this code, you need to have Node (< v12, recommended v11) and npm installed
 
-```
-npm install
-npm run start
-```
+Install and launch the game 
 
-Then head to `localhost:3000` in your browser.
+- Move the sample folder outside the moonrider-master folder
+- From the moonrider-master folder: run ``npm install``
+- Open the package.json file of the sample folder and replace the relative path of the moonrider-master folder to the sample folder at line 61 
+
+"moonriderlib": "file: ../moonrider-master",
+
+In this example, the two folders sample and moonrider-master are in the same parent folder.   
+
+- From the sample folder: 
+  - Run ``npm install ``
+  - Run ``npm run start``
+- Then head to `localhost:3000` in your browser.
 
 ### Remixing and Forking
 
+Each time a file in the moonrider-master folder is modified, it must be recompiled with the npm run build command from the moonrider-master folder. 
+
+Each time the configuration of the moonrider library is modified (i.e. modification of the webpack.config.js file in moonrider-master), you have to reinstall the library using the npm i command in the sample folder.
+
 Make this game your own! Some easy ways to mess around:
 
-- To modify or add more color palettes, change `src/constants/colors.js`.
-- To change images, replace images in `src/assets/img/` folder. For example,
+- To modify or add more color palettes, change `moonrider-master/src/constants/colors.js`.
+- To change images, replace images in `sample/assets/img/` folder. For example,
   replace the moon at `src/assets/img/moon.png'.
-- To change models, replace models in `src/assets/models/` folder. For example,
-  replace the arrow blocks at `src/assets/models/arrowblue.obj` or
+- To change models, replace models in `sample/assets/models/` folder. For example,
+  replace the arrow blocks at `sample/assets/models/arrowblue.obj` or
   `arrowred.obj`.
-- To change sounds, replace sounds in `src/assets/sounds`. For example, replace
-  the hit sounds at `src/assets/sounds/`.
-- Change various values such as `speed` in `src/state/index.js` or
-  `BEAT_PRELOAD_TIME` in `src/components/beat-generator.js` to mess with how
+- To change sounds, replace sounds in `sample/assets/sounds`. 
+- Change various values such as `speed` in `moonrider-master/src/state/index.js` or
+  `BEAT_PRELOAD_TIME` in `moonrider-master/src/components/beat-generator.js` to mess with how
   fast you travel along the curve, or how much reaction time until the notes
   arrive to the player.
 
@@ -72,13 +51,17 @@ A-Frame and JavaScript, is doable!
 | ?debugstate={loading, victory}          | Show loading or victory screen.                               |
 | ?skipintro=true                         | Skip introduction screen.                                     |
 
-### Deploying to GitHub
+##How the example works
 
-Showing off some crazy customizations? Enable GitHub Pages deployment to deploy
-`gh-pages` branch, and then:
+- Click on the Begin button
+- Choose the game mode you want:
+  - Ride Mode - Just sit back and enjoy the ride.
+  - Punch Mode - Crush the stars.
+  - Viewer Mode - Watch the beatmap within your browser.
+  - Classic Mode - Surf and slice along the musical road.
+- Choose the song from the first drop-down list
+- Choose a difficulty in the second drop-down list
+- Start the game by pressing Play
+- To pause the game, press the Pause button 
+- When the game is paused you can either continue the game by pressing the Resume button or start again by pressing Restart or exit the game with the exit button.  
 
-```
-npm run deploy
-```
-
-The website will be available on `https://yourusername.github.io/moonrider/`.

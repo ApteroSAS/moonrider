@@ -7,7 +7,9 @@ To modify this code, you need to have Node (< v12, recommended v11) and npm inst
 Install and launch the game 
 
 - Move the sample folder outside the moonrider-master folder
-- From the moonrider-master folder: run ``npm install``
+- From the moonrider-master folder:
+  - run ``npm install``
+  - run ``npm build``
 - Open the package.json file of the sample folder and replace the relative path of the moonrider-master folder to the sample folder at line 61 
 
 "moonriderlib": "file: ../moonrider-master",

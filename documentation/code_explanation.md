@@ -193,10 +193,11 @@ In the beat.js file you have to replace the line in comment with the line above 
 - preservation of the effect when a beat is cut
 - Removal of console.log for debugs
 - Scores to manage 
+- The effect of the beat turning when using the wrong hand and/or direction works and the beat is not counted
 
 ## **Modifications to do:** 	
 
-	
+-Rectify the direction of destruction of the beats (beats that are destroyed in the opposite direction that they are for the beats up and down: beat up -> destroyed down and vice versa) on the other hand the beats on the sides work in the right direction.	
 -	Check that the message Game over or song cleared is displayedChange the A-Frame buttons at the end of the game (victory or defeat) into html buttons
 -	Successfully put a color on the victoryAccuracyRing entity 
 -	Look at how to do in case of defeat to restart and quit

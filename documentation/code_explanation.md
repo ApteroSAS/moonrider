@@ -182,25 +182,25 @@ In the beat.js file you have to replace the line in comment with the line above 
 When I tested the game, I realized that the direction to cut the beats was reversed between the top and the bottom as well as for the diagonals showing therefore a concern of reference and more particularly a concern at the level of the Y axis.
 So I modified the beat.js file by reversing the 1 and the -1 for the second coordinate of each vector below (lines 31 to 40 of the new version):
 
-`   `const CUT_DIRECTION_VECTORS = {
+`    `const CUT_DIRECTION_VECTORS = {
 
-`       `up: new THREE.Vector3(0, -1, 0),
+`      `up: new THREE.Vector3(0, -1, 0),
 
-`       `down: new THREE.Vector3(0, 1, 0),
+`      `down: new THREE.Vector3(0, 1, 0),
 
-`       `left: new THREE.Vector3(-1, 0, 0),
+`      `left: new THREE.Vector3(-1, 0, 0),
 
-`       `right: new THREE.Vector3(1, 0, 0),
+`      `right: new THREE.Vector3(1, 0, 0),
 
-`       `upleft: new THREE.Vector3(-1, -1, 0).normalize(),
+`      `upleft: new THREE.Vector3(-1, -1, 0).normalize(),
 
-`       `upright: new THREE.Vector3(1, -1, 0).normalize(),
+`      `upright: new THREE.Vector3(1, -1, 0).normalize(),
 
-`       `downleft: new THREE.Vector3(-1, 1, 0).normalize(),
+`      `downleft: new THREE.Vector3(-1, 1, 0).normalize(),
 
-`       `downright: new THREE.Vector3(1, 1, 0).normalize()
+`      `downright: new THREE.Vector3(1, 1, 0).normalize()
 
-`   `};
+`    `};
 
 # **Changes made and to be made**
 

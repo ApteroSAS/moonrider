@@ -221,6 +221,7 @@ So I modified the beat.js file by reversing the 1 and the -1 for the second coor
 
 ## **Modifications to do:** 	
 
+- Delete dead code 
 - Make search system via API
 - Make the mines work (example of music with mines: dual of the fates from Star Wars Remix)	
 - Make the effect of cut beats work in the punch mode

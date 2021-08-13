@@ -78,17 +78,17 @@ In the setupBeat function, the following three lines (lines 281 to 283) are used
 
 `    `const verticalPosition = this.verticalPositionsHumanized[noteInfo.\_lineLayer];
 
-Each beat is positioned on the curve according to coordinates. The vertical position varies between the integers 0,1 and 2. These integers correspond respectively to the lowest position, the middle position, and the highest position. The horizontal position varies between the integers:
+Each beat is positioned on the curve according to coordinates. The vertical position varies between the integers 0 and 1 and is indicated by the variable linePlayer.. These integers correspond respectively to the lowest position and the highest position. The horizontal position varies between the integers:
 
-\. -2: located at the level of the line on the left
+\. 0: located at the level of the line on the left
 
-\. -1: located at the level of the line in the middle on the left
+\. 1: located at the level of the line in the middle on the left
 
-\. 0: located at the level of the line in the middle
+\. 2: located at the level of the line in the middle on the right
 
-\. 1: located at the level of the line in the middle on the right
+\. 3: located at the level of the line on the right
 
-\. 2: located at the level of the line on the right
+This horizontal position is indicated by the variable lineIndex.
 
 Depending on the chosen game mode, two types of components are used for the beats. If the mode is ride mode then each beat will use the plume component and for other modes it will use the beat component.
 # **Functioning of the player's movement** 

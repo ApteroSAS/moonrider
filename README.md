@@ -48,8 +48,6 @@ A-Frame and JavaScript, is doable!
 
 | URL Parameter                           | Description                                                   |
 |-----------------------------------------|---------------------------------------------------------------|
-| ?debugcontroller={classic, punch, ride} | Show controllers and move them with shift/ctrl + {h, j, k, l} |
-| ?debugbeatpositioning={classic, punch}  | Show all notes in possible positionings.                      |
 | ?debugstate=victory          | Show victory screen.                               |
 
 ## How the example works

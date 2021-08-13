@@ -179,6 +179,20 @@ In the beat.js file you have to replace the line in comment with the line above 
 
 `    `//explodeEventDetail.position.copy(this.el.object3D.position);
 
+When I tested the game, I realized that the direction to cut the beats was reversed between the top and the bottom as well as for the diagonals showing therefore a concern of reference and more particularly a concern at the level of the Y axis.
+So I modified the beat.js file by reversing the 1 and the -1 for the second coordinate of each vector below (lines 31 to 40 of the new version):
+
+`   `const CUT_DIRECTION_VECTORS = {
+`       `up: new THREE.Vector3(0, -1, 0),
+`       `down: new THREE.Vector3(0, 1, 0),
+`       `left: new THREE.Vector3(-1, 0, 0),
+`       `right: new THREE.Vector3(1, 0, 0),
+`       `upleft: new THREE.Vector3(-1, -1, 0).normalize(),
+`       `upright: new THREE.Vector3(1, -1, 0).normalize(),
+`       `downleft: new THREE.Vector3(-1, 1, 0).normalize(),
+`       `downright: new THREE.Vector3(1, 1, 0).normalize()
+`   `};
+
 # **Changes made and to be made**
 
 ## **General changes made :**
@@ -194,11 +208,14 @@ In the beat.js file you have to replace the line in comment with the line above 
 - Removal of console.log for debugs
 - Scores to manage 
 - The effect of the beat turning when using the wrong hand and/or direction works and the beat is not counted
+-Rectification of the direction of destruction of the beats
 
 ## **Modifications to do:** 	
 
--Rectify the direction of destruction of the beats (beats that are destroyed in the opposite direction that they are for the beats up and down: beat up -> destroyed down and vice versa) on the other hand the beats on the sides work in the right direction.	
--	Check that the message Game over or song cleared is displayedChange the A-Frame buttons at the end of the game (victory or defeat) into html buttons
+- Make search system via API
+- Make the mines work (example of music with mines: dual of the fates from Star Wars Remix)	
+- Make the effect of cut beats work in the punch mode
+- Change the A-Frame buttons at the end of the game (victory or defeat) into html buttons
 -	Successfully put a color on the victoryAccuracyRing entity 
 -	Look at how to do in case of defeat to restart and quit
 -	Make html buttons and drop-down lists appear in VR mode

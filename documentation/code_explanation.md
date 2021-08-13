@@ -183,14 +183,23 @@ When I tested the game, I realized that the direction to cut the beats was rever
 So I modified the beat.js file by reversing the 1 and the -1 for the second coordinate of each vector below (lines 31 to 40 of the new version):
 
 `   `const CUT_DIRECTION_VECTORS = {
+
 `       `up: new THREE.Vector3(0, -1, 0),
+
 `       `down: new THREE.Vector3(0, 1, 0),
+
 `       `left: new THREE.Vector3(-1, 0, 0),
+
 `       `right: new THREE.Vector3(1, 0, 0),
+
 `       `upleft: new THREE.Vector3(-1, -1, 0).normalize(),
+
 `       `upright: new THREE.Vector3(1, -1, 0).normalize(),
+
 `       `downleft: new THREE.Vector3(-1, 1, 0).normalize(),
+
 `       `downright: new THREE.Vector3(1, 1, 0).normalize()
+
 `   `};
 
 # **Changes made and to be made**

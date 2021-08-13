@@ -202,7 +202,6 @@ In the beat.js file you have to replace the line in comment with the line above 
 -	Successfully put a color on the victoryAccuracyRing entity 
 -	Look at how to do in case of defeat to restart and quit
 -	Make html buttons and drop-down lists appear in VR mode
--	Punch mode to work
 -	Transform the entities corresponding to the different available modes into HTML buttons 
 -	Check the direction of the camera with the VR headset (sometimes the curve is behind or to the side of the player and/or very close to the ground)
 -	Realize the music server: use the music on YouTube and not the moonrider server

@@ -1,7 +1,7 @@
 /**
  * Calculate punch bounding box and velocity.
  */
-AFRAME.registerComponent('punch', {
+ AFRAME.registerComponent('punch', {
   schema: {
     enabled: {default: false}
   },
@@ -12,7 +12,7 @@ AFRAME.registerComponent('punch', {
     this.lastSample = new THREE.Vector3();
     this.lastSampleTime = 0;
     this.speed = 0;
-
+    this.vectBeat=new THREE.Vector3();
     this.bbox = new THREE.Box3();
     this.bboxEl = this.el.querySelector('.punchBbox');
   },
@@ -23,7 +23,7 @@ AFRAME.registerComponent('punch', {
 
   tick: function (time, dt) {
     if (!this.data.enabled) { return; }
-
+    
     // Calculate velocity (direction + speed), m/s.
     this.direction = this.currentPos
       .copy(this.el.object3D.position)
@@ -45,7 +45,8 @@ AFRAME.registerComponent('punch', {
     const expand = new THREE.Vector3(0, 0, 0.2);
 
     return function (beat) {
-      box.copy(beat.bbox).translate(beat.el.object3D.position).expandByScalar(0.1).expandByVector(expand);
+      beat.el.object3D.getWorldPosition(this.vectBeat);
+      box.copy(beat.bbox).translate(this.vectBeat).expandByScalar(0.1).expandByVector(expand);
       return this.bbox.intersectsBox(box);
     };
   })()

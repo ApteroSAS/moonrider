@@ -61,7 +61,7 @@ AFRAME.registerComponent('plume', {
     for (let i = 0; i < this.handsEls.length; i++) {
       const hand = this.handsEls[i];
       hand.object3D.getWorldPosition(this.handPos); 
-      if (this.handPos.distanceToSquared(this.el.object3D.position) < 0.2) {
+      if (this.handPos.distanceToSquared(this.vectBeat) < 0.2) { 
         hand.emit('plumepulse');
       }
     }

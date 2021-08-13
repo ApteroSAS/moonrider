@@ -50,8 +50,7 @@ A-Frame and JavaScript, is doable!
 |-----------------------------------------|---------------------------------------------------------------|
 | ?debugcontroller={classic, punch, ride} | Show controllers and move them with shift/ctrl + {h, j, k, l} |
 | ?debugbeatpositioning={classic, punch}  | Show all notes in possible positionings.                      |
-| ?debugstate={loading, victory}          | Show loading or victory screen.                               |
-| ?skipintro=true                         | Skip introduction screen.                                     |
+| ?debugstate=victory          | Show victory screen.                               |
 
 ## How the example works
 

@@ -29,14 +29,14 @@ const PUNCH = 'punch';
 const RIDE = 'ride';
 
 const CUT_DIRECTION_VECTORS = {
-  up: new THREE.Vector3(0, 1, 0),
-  down: new THREE.Vector3(0, -1, 0),
+  up: new THREE.Vector3(0, -1, 0),
+  down: new THREE.Vector3(0, 1, 0),
   left: new THREE.Vector3(-1, 0, 0),
   right: new THREE.Vector3(1, 0, 0),
-  upleft: new THREE.Vector3(-1, 1, 0).normalize(),
-  upright: new THREE.Vector3(1, 1, 0).normalize(),
-  downleft: new THREE.Vector3(-1, -1, 0).normalize(),
-  downright: new THREE.Vector3(1, -1, 0).normalize()
+  upleft: new THREE.Vector3(-1, -1, 0).normalize(),
+  upright: new THREE.Vector3(1, -1, 0).normalize(),
+  downleft: new THREE.Vector3(-1, 1, 0).normalize(),
+  downright: new THREE.Vector3(1, 1, 0).normalize()
 };
 
 const MODELS = {
@@ -370,7 +370,7 @@ AFRAME.registerComponent('beat', {
   onGenerate: function (songPosition, horizontalPosition, verticalPosition, cutDirection, heightOffset) {
     const data = this.data;
     const el = this.el;
-
+  
     this.beatSystem.registerBeat(this);
 
     // Model is 0.29 size. We make it 1.0 so we can easily scale based on 1m size.
